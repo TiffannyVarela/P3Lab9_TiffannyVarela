@@ -68,6 +68,7 @@ class Hilo_Batalla{
 				hd.stop();
 				hv.stop();
 				while(vive){
+					setEspera(100000);
 				
 																	do{
 																		cout<<"BATALLA ENCONTRADA!"<<endl;
@@ -108,20 +109,25 @@ class Hilo_Batalla{
 																		_endthread();
 																		system("exit");
 																	}
+																	Sleep(espera);
+																	if(!vive){
+																		_endthread();
+																		j->~Jugador();
+																	}
 				}
+			/*	Sleep(espera);
+				if(!vive){
+					_endthread();
+					j->~Jugador();
+				}*/
+			}
+			else{
 				Sleep(espera);
 				if(!vive){
 					_endthread();
 					j->~Jugador();
 				}
 			}
-			else{
-				}
-				Sleep(espera);
-				if(!vive){
-					_endthread();
-					j->~Jugador();
-				}
 		}
 		
 		int menu(){
