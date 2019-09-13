@@ -4,12 +4,12 @@
 #include <iostream>
 #include "Jugador.cpp"
 
-#ifndef HILO_DINERO_CPP
-#define HILO_DINERO_CPP
+#ifndef HILO_VIDAS_CPP
+#define HILO_VIDAS_CPP
 
 using namespace std;
 
-class Hilo_Dinero{
+class Hilo_Vidas{
 	private:
 		bool vive;
 		int espera;
@@ -17,7 +17,7 @@ class Hilo_Dinero{
 		Jugador* j;
 		
 	public:
-		Hilo_Dinero(){
+		Hilo_Vidas(){
 		}
 		
 		void setVive(bool v){
@@ -37,17 +37,22 @@ class Hilo_Dinero{
 		}
 		
 		void run(){
-			_beginthread(&Hilo_Dinero::runner, 0, static_cast<void*>(this));
+			_beginthread(&Hilo_Vidas_Dinero::runner, 0, static_cast<void*>(this));
 		}
 		
 		static void runner(void*o){
-			static_cast<Hilo_Dinero*>(o)->runnerEstatico();
+			static_cast<Hilo_Vidas*>(o)->runnerEstatico();
 		}
 		
 		void runnerEstatico(){
 			while(vive){
-				cout<<"+1 de Dinero!"<<endl;
-				j->setDinero(j->getDinero()+1);
+				if(j->getVida()<j->getVida_max()){
+					cout<<"+1 de Vida!"<<endl;
+					j->setVida(j->getVida()+1);
+				}
+				else{
+					cout<<"Vidas Completas"<<endl;
+				}
 				Sleep(espera);
 				if(!vive){
 					_endthread();

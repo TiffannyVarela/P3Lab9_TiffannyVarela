@@ -55,7 +55,6 @@ class Hilo_Batalla{
 			int num;
 			srand (time(NULL));
 			while(vive){
-				//MessageBox(0, texto.c_str(), "Advertencia", MB_OK);
 				num = rand() % 99 + 1;
 				vida_op = rand() % 4 + 1;
 				opc_op = rand() % 3 + 1;
