@@ -7,8 +7,8 @@
 #include <time.h> 
 #include "Jugador.cpp"
 
-#ifndef HILO_CPP
-#define HILO_CPP
+#ifndef HILO_BATALLA_CPP
+#define HILO_BATALLA_CPP
 
 using namespace std;
 

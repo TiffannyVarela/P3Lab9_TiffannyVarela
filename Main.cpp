@@ -44,6 +44,7 @@ int main(){
 				
 			case 3:
 				j->~Jugador();
+				hb.stop();
 				break;
 		}
 		
