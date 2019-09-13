@@ -4,12 +4,8 @@
 #include <CONIO.h>
 
 
-#include <stdio.h>  
-#include <stdlib.h> 
-#include <time.h> 
-
-
 #include "Jugador.cpp"
+#include "Hilo_Batalla.cpp"
 
 using namespace std;
 
@@ -20,12 +16,9 @@ int main(){
 	int opc =0;
 	string nombre;
 	Jugador* j;
-	int num;
+	int c = getch;
+	Hilo_Batalla hb;
 	
-	
-	srand (time(NULL));
-	num = rand() % 99 + 1;
-	cout<<"Num "<<num<<endl;
 	
 	cout<<"Ingresa tu Nombre: ";
 	cin>>nombre;
@@ -34,6 +27,9 @@ int main(){
 	do{
 		
 		switch(opc=menu()){
+			hb.setVive(true);
+			hb.setEspera(10000);
+			hb.run();
 			case 1:
 				cout<<"Nivel: ";
 				cout<<j->getNivel()<<endl;
