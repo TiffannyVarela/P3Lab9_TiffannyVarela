@@ -6,6 +6,8 @@
 
 #include "Jugador.cpp"
 #include "Hilo_Batalla.cpp"
+#include "Hilo_Dinero.cpp"
+#include "Hilo_Vidas.cpp"
 
 using namespace std;
 
@@ -18,7 +20,8 @@ int main(){
 	Jugador* j;
 	int c = getch;
 	Hilo_Batalla hb;
-	
+	Hilo_Dinero hd;
+	Hilo_Vidas hv;
 	
 	cout<<"Ingresa tu Nombre: ";
 	cin>>nombre;
@@ -27,9 +30,21 @@ int main(){
 	do{
 		
 		switch(opc=menu()){
+			//hilo batalla
 			hb.setVive(true);
 			hb.setEspera(10000);
 			hb.run();
+			
+			//hilo dinero
+			hd.setVive(true);
+			hd.setEspera(7000);
+			hd.run();
+			
+			//hilo vidas
+			hv.setVive(true);
+			hv.setEspera(6000);
+			hv.run();
+			
 			case 1:
 				cout<<"Nivel: ";
 				cout<<j->getNivel()<<endl;
