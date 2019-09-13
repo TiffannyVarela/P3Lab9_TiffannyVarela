@@ -47,10 +47,12 @@ class Hilo_Vidas{
 		void runnerEstatico(){
 			while(vive){
 				if(j->getVida()<j->getVida_max()){
+					cout<<endl;
 					cout<<"+1 de Vida!"<<endl;
 					j->setVida(j->getVida()+1);
 				}
 				else{
+					cout<<endl;
 					cout<<"Vidas Completas"<<endl;
 				}
 				Sleep(espera);

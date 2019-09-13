@@ -18,6 +18,10 @@ class Hilo_Dinero{
 		
 	public:
 		Hilo_Dinero(){
+			
+		}
+		Hilo_Dinero(Jugador* j){
+			this->j=j;
 		}
 		
 		void setVive(bool v){
@@ -45,9 +49,13 @@ class Hilo_Dinero{
 		}
 		
 		void runnerEstatico(){
+			int tiene = j->getDinero();
+			//cout<<"Tiene "<<tiene<<endl;
 			while(vive){
+				cout<<endl;
 				cout<<"+1 de Dinero!"<<endl;
-				j->setDinero(j->getDinero()+1);
+				cout<<endl;
+				j->setDinero(tiene+1);
 				Sleep(espera);
 				if(!vive){
 					_endthread();
