@@ -7,10 +7,15 @@
 #include <time.h> 
 #include "Jugador.cpp"
 
+using namespace std;
+class Hilo_Dinero;
+class Hilo_Vidas;
+
 #ifndef HILO_BATALLA_CPP
 #define HILO_BATALLA_CPP
 
-using namespace std;
+#include "Hilo_Dinero.cpp"
+#include "Hilo_Vidas.cpp"
 
 class Hilo_Batalla{
 	private:
@@ -54,46 +59,55 @@ class Hilo_Batalla{
 			int ganadas=0;
 			int num;
 			srand (time(NULL));
-			while(vive){
-				num = rand() % 99 + 1;
-				vida_op = rand() % 4 + 1;
-				opc_op = rand() % 3 + 1;
-				cout<<"Num "<<num<<endl;
+			num = rand() % 99 + 1;
+			vida_op = rand() % 4 + 1;
+			Hilo_Dinero hd;
+			Hilo_Vidas hv;
+			cout<<"Num "<<num<<endl;
+			if(num <=80){
+				hd.stop();
+				hv.stop();
+				while(vive){
 				
-				if(num <=80){
-					do{
-						cout<<"BATALLA ENCONTRADA!"<<endl;
-						cout<<"Vida Jugador: "<<j->getVida()<<endl;
-						cout<<"Vida Oponente: "<<vida_op<<endl;
-						opc=menu();
-						cout<<"Opcion Oponente "<<opc_op<<endl;
-						if(opc==2 && opc_op==1 || opc==3 && opc_op==2 || opc==1 && opc_op==3){
-							cout<<"Gana Jugador"<<endl;
-							ganadas++;
-							vida_op--;
-						}
-						else if(opc_op==2 && opc==1 || opc_op==3 && opc==2 || opc_op==1 && opc==3){
-							cout<<"Gana Oponente"<<endl;
-							j->setVida(j->getVida()-1);
-						}
-						else{
-							cout<<"Empate"<<endl;
-						}
-						
-					}while(ganadas==j->getNivel() || j->getVida()==0 || vida_op==0);
-					
-					if(ganadas==j->getNivel() || vida_op==0){
-						cout<<"Gana Jugador la Batalla "<<endl;
-						j->setNivel(j->getNivel()+1);
-						j->setVida_max(j->getVida_max()+1);
-					}
-					else{
-						cout<<"Gana Oponente la Batalla "<<endl;
-						j->~Jugador();
-						system("exit");
-					}
-				}
-				else{
+																	do{
+																		cout<<"BATALLA ENCONTRADA!"<<endl;
+																		cout<<"Vida Jugador: "<<j->getVida()<<endl;
+																		cout<<"Vida Oponente: "<<vida_op<<endl;
+																		opc=menu();
+																		opc_op = rand() % 3 + 1;
+																		cout<<"Opcion Oponente "<<opc_op<<endl;
+																		if(opc==2 && opc_op==1 || opc==3 && opc_op==2 || opc==1 && opc_op==3){
+																			cout<<"Gana Jugador"<<endl;
+																			ganadas++;
+																			vida_op--;
+																		}
+																		else if(opc_op==2 && opc==1 || opc_op==3 && opc==2 || opc_op==1 && opc==3){
+																			cout<<"Gana Oponente"<<endl;
+																			j->setVida(j->getVida()-1);
+																		}
+																		else{
+																			cout<<"Empate"<<endl;
+																		}
+																		
+																	}while(ganadas==j->getNivel() || j->getVida()==0 || vida_op==0);
+																	
+																	if(ganadas==j->getNivel() || vida_op==0){
+																		cout<<"Gana Jugador la Batalla "<<endl;
+																		j->setNivel(j->getNivel()+1);
+																		j->setVida_max(j->getVida_max()+1);
+																		j->~Jugador();
+																		hd.setVive(true);
+																		hd.setEspera(7000);
+																		hv.setVive(true);
+																		hv.setEspera(6000);
+																		_endthread();
+																	}
+																	else{
+																		cout<<"Gana Oponente la Batalla "<<endl;
+																		j->~Jugador();
+																		_endthread();
+																		system("exit");
+																	}
 				}
 				Sleep(espera);
 				if(!vive){
@@ -101,6 +115,13 @@ class Hilo_Batalla{
 					j->~Jugador();
 				}
 			}
+			else{
+				}
+				Sleep(espera);
+				if(!vive){
+					_endthread();
+					j->~Jugador();
+				}
 		}
 		
 		int menu(){

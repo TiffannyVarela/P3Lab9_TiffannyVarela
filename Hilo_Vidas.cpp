@@ -37,7 +37,7 @@ class Hilo_Vidas{
 		}
 		
 		void run(){
-			_beginthread(&Hilo_Vidas_Dinero::runner, 0, static_cast<void*>(this));
+			_beginthread(&Hilo_Vidas::runner, 0, static_cast<void*>(this));
 		}
 		
 		static void runner(void*o){

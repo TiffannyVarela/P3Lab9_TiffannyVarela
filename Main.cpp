@@ -18,7 +18,6 @@ int main(){
 	int opc =0;
 	string nombre;
 	Jugador* j;
-	int c = getch;
 	Hilo_Batalla hb;
 	Hilo_Dinero hd;
 	Hilo_Vidas hv;
@@ -26,24 +25,25 @@ int main(){
 	cout<<"Ingresa tu Nombre: ";
 	cin>>nombre;
 	j = new Jugador(nombre);
+	//cout<<"Presione Enter Para Iniciar: ";
+//	int c = getch();
+	//hilo batalla
+	hb.setVive(true);
+	hb.setEspera(10000);
+	hb.run();
 	
+	//hilo dinero
+	hd.setVive(true);
+	hd.setEspera(7000);
+	hd.run();
+	
+	//hilo vidas
+	hv.setVive(true);
+	hv.setEspera(6000);
+	hv.run();
 	do{
 		
 		switch(opc=menu()){
-			//hilo batalla
-			hb.setVive(true);
-			hb.setEspera(10000);
-			hb.run();
-			
-			//hilo dinero
-			hd.setVive(true);
-			hd.setEspera(7000);
-			hd.run();
-			
-			//hilo vidas
-			hv.setVive(true);
-			hv.setEspera(6000);
-			hv.run();
 			
 			case 1:
 				cout<<"Nivel: ";
@@ -55,11 +55,21 @@ int main(){
 				break;
 				
 			case 2:
+				if(j->getDinero()>0 && j->getVida() < j->getVida_max()){
+					cout<<"Vida Agregada"<<endl;
+					j->setDinero(j->getDinero()-1);
+					j->setVida(j->getVida()+1);
+				}
+				else{
+					cout<<"Vidas Completas o Dinero Insuficiente"<<endl;
+				}
 				break;
 				
 			case 3:
 				j->~Jugador();
 				hb.stop();
+				hd.stop();
+				hv.stop();
 				break;
 		}
 		
