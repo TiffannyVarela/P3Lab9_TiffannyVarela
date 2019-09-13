@@ -3,6 +3,12 @@
 #include <string.h>
 #include <CONIO.h>
 
+
+#include <stdio.h>  
+#include <stdlib.h> 
+#include <time.h> 
+
+
 #include "Jugador.cpp"
 
 using namespace std;
@@ -14,6 +20,13 @@ int main(){
 	int opc =0;
 	string nombre;
 	Jugador* j;
+	int num;
+	
+	
+	srand (time(NULL));
+	num = rand() % 99 + 1;
+	cout<<"Num "<<num<<endl;
+	
 	cout<<"Ingresa tu Nombre: ";
 	cin>>nombre;
 	j = new Jugador(nombre);
